@@ -1,9 +1,16 @@
-var express = require('express')
-var app = express()
+const express = require('express');
+const app = express();
+const port = 8080;
+
+app.use(express.static([__dirname, '/public'].join('')));
 
 app.get('/', function (req, res) {
-  res.send('Hello World!')
-})
-app.listen(process.env.PORT || 5000, function () {
-  console.log('Example app listening on port 5000!')
+  res.render('index.html');
+});
+
+app.get('*', function (req, res) {
+  res.redirect('/');
+});
+app.listen(process.env.PORT || port, function () {
+  console.log('Example app listening on port 8080!')
 })
